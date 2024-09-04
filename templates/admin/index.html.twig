@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h5 class="text-center mt-4">Gestion des offres</h5>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <a class="btn btn-primary mb-3" href="{{ path('product_new') }}">Ajouter une offre</a>
+                <table class="table table-striped border-0">
+                    <thead>
+                        <tr>
+                            <th class="border-bottom">Nom</th>
+                            <th class="border-bottom">Ventes</th>
+                            <th class="border-bottom w-30">Description</th>
+                            <th class="border-bottom">Date</th>
+                            <th class="border-bottom">Prix</th>
+                            <th class="border-bottom">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>
+                                <div class="mb-1">{{ product.name }}</div>
+                                <div><img src="{{ asset('images/product/' ~ product.id ~ '.png') }}" width="64"></div>
+                            </td>
+                            <td>
+                                {% set vente = 0 %}
+                                {% for count in counts %}
+                                    {% if count.id == product.id %}
+                                        {% set vente = count.count %}
+                                    {% endif %}
+                                {% endfor %}
+                                {{ vente }}
+                            </td>
+                            <td>{{ product.description|slice(0, 130) }}{{ product.description|length > 50 ? '...' : '' }}</td>
+                            <td>{{ product.datetime | date('d/m/Y H:i') }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>
+                                <form method="post" action="{{ path('product_delete', {'id': product.id}) }}" onsubmit="return confirm('Etes vous certain de vouloir supprimer cette offre ?');">
+                                    <div class="btn-group-vertical">
+                                        <a class="btn btn-outline-success btn-sm mb-1" href="{{ path('product_edit', {'id': product.id}) }}">Modifier</a>
+                                        <button class="btn btn-outline-danger btn-sm">Supprimer</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

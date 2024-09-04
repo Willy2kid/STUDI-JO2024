@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- List of items -->
+    <div class="container mt-4">
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-dark text-white d-flex">
+                        <h5>Billets disponibles</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for product in products %}
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="col-md-2 pl-0">
+                                    <img src="{{ asset('images/product/' ~ product.id ~ '.png') }}" width="110">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            <h5 class="mt-0 mb-0">{{ product.name }}</h5>
+                                            <small>{{ product.datetime|date('d/m/Y H:i') }}</small>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <p class="card-text" title="{{ product.description }}">{{ product.description|slice(0, 100) }}...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <div class="d-flex flex-column">
+                                        {{ form_start(forms[product.id]) }}
+                                            <div class="btn-group-vertical">
+                                                {{ form_widget(forms[product.id].solo, {'attr': {'class': 'update-cart-button btn btn-dark btn-sm mb-1'}}) }}
+                                                {{ form_widget(forms[product.id].duo, {'attr': {'class': 'update-cart-button btn btn-dark btn-sm mb-1'}}) }}
+                                                {{ form_widget(forms[product.id].famille, {'attr': {'class': 'update-cart-button btn btn-dark btn-sm'}}) }}
+                                            </div>
+                                        {{ form_end(forms[product.id]) }}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Summary -->
+            <div class="col-md-4 sticky-top" style="top: 70px; height: 300px;" id="cartContent">
+                <div class="card mt-4 mt-md-0">
+                    <h5 class="card-header bg-dark text-white">Résumé</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for item in cart.items %}
+                            <li class="list-group-item py-1" style="border: none;">
+                                <div>{{ item.product.name }} <small>(offre {{ item.offer }})</small></div>
+                            </li>
+                        {% endfor %}
+                        <li class="list-group-item d-flex justify-content-between" style="border-top: 1px solid #ddd;">
+                            <div><b>Total</b></div>
+                            <span><b>{{ cart.total }} €</b></span>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{ path('app_cart') }}" class="btn btn-warning w-100">Voir vos achats</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <script src="{{ asset('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('js/cart.js') }}"></script>
+    </footer>
+{% endblock %}
