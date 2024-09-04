@@ -10,6 +10,11 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    
+    app.two_factor_condition:
+        class: App\Security\TwoFactor\TwoFactorCondition
+        # arguments:
+        #     - '@security.token_storage'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

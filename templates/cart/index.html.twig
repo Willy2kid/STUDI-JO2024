@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container mt-4">
+        {% if cart.items.count > 0 %}
+            <div class="row mt-4">
+                <!-- List of items -->
+                <div class="col-md-8">
+                    {{ form_start(form) }}
+                    <div class="card">
+                        <div class="card-header bg-dark text-white d-flex">
+                            <h5>Votre Panier</h5>
+                            <div class="ml-auto">
+                                {{ form_widget(form.clear, {'attr': {'class': 'btn btn-light'}}) }}
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for item in form.items %}
+                                <li class="list-group-item item-in-cart d-flex align-items-center">
+                                    <div class="col-md-2 pl-0">
+                                        <img src="{{ asset('images/product/' ~ item.vars.data.product.id ~ '.png') }}" width="110">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-2">
+                                                <h5 class="mt-0 mb-0">{{ item.vars.data.product.name }} </h5>
+                                                <small>{{ item.vars.data.product.datetime|date('d/m/Y H:i') }} ({{ item.vars.data.quantity }} pers.)</small>
+                                            </div>
+                                            <div class="col-md-12">
+                                                {{ form_widget(item.remove, {'attr': {'class': 'btn btn-dark btn-sm'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-right">
+                                        <b>{{ (item.vars.data.product.price * item.vars.data.quantity) }} €</b>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <!-- Summary -->
+                <div class="col-md-4">
+                    <div class="card mt-4 mt-md-0">
+                        <h5 class="card-header bg-dark text-white"></h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div><b>Total</b></div>
+                                <span><b>{{ cart.total }} €</b></span>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <!-- <a href="#" class="btn btn-warning w-100">Checkout</a> -->
+                            <a href="{{ path('app_checkout') }}" class="btn btn-warning w-100">Paiement</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                Votre panier est vide. Aller à la <a href="{{ path('shop') }}">boutique</a>.
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container mt-4">
+        {% if oldCarts|length > 0 %}
+            <!-- Concluded purchases -->
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <hr class="mb-4">
+                    <div class="card-header bg-dark text-white d-flex">
+                        <h5>Historique d'achat</h5>
+                    </div>
+                    {% for oldCart in oldCarts %}
+                        <div class="card mb-4">
+                            <div class="card-header bg-light text-muted py-1">
+                                <small>{{ oldCart.date }} - Total: {{ oldCart.total }} €</small>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for item in oldCart.items %}
+                                    <li class="list-group-item">
+                                        <div class="d-flex">
+                                            <div class="flex-fill mr-2">
+                                                {# <img src="{{ asset('images/product/' ~ item.id ~ '.png') }}" width="110"> #}
+                                            </div>
+                                            <div class="flex-fill mr-2">
+                                                <h5 class="mt-0 mb-0">{{ item.name }}</h5>
+                                                <small>{{ item.datetime|date('d/m/Y H:i') }}</small></br>
+                                                <small>Entrée pour {{ item.quantity }} personne(s)</small>
+                                            </div>
+                                            <div class="flex-fill mr-2 text-right">
+                                                <!-- Add the price here if you want -->
+                                            </div>
+                                            <div class="flex-fill mr-2">
+                                                {# {% if item.id %} #}
+                                                    {# <img src="{{ item.qrcode }}" width="64" alt="QR Code"> #}
+                                                    {# <img src="{{ asset('images/qrcode/qrcode_20.png') }}" width="64" alt="QR Code"> #}
+                                                    <img src="{{ asset('images/qrcode/' ~ item.ticket ~ '.png') }}" width="64" alt="QR Code">
+                                                    <a href="{{ asset('images/qrcode/' ~ item.ticket ~ '.png') }}" download="qrcode_{{ item.ticket }}.png">
+                                                        <button type="button" class="btn btn-primary btn-xs" style="font-size: 0.8em;">Télécharger</button>
+                                                    </a>
+                                                {# {% endif %} #}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 class="text-center mt-4">Créer un compte</h5>
+                {{ form_start(registrationForm) }}
+                    <div class="form-group">
+                        {{ form_row(registrationForm.lastname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control'}, 'label': 'Password'}) }}
+                    </div>
+                    <div class="form-group">
+                            <div class="form-check">
+                            {{ form_widget(registrationForm.agreeTerms) }}
+                            <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">Accepter les conditions d'utilisation</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+        {{ form_errors(registrationForm) }}
+    </div>
+{% endblock %}

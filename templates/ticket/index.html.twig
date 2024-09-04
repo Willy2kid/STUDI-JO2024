@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification de tickets{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 class="text-center mt-4">QR Code Verification</h5>
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            {{ form_widget(form.qrCodeText, {'attr': {'class': 'form-control'}}) }}
+                            <span class="input-group-append">
+                                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}, 'label': 'Vérifier'}) }}
+                            </span>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        {% if result is not null %}
+            <div class="row mt-4">
+                <div class="col-md-6 offset-md-3">
+                    {% if result.error is defined %}
+                        <div class="alert alert-danger">
+                            {{ result.error }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success" style="text-align: center;">
+                            <p style="margin: 0.5em 0;">User Name: {{ result.userName }}</p>
+                            <p style="margin: 0.5em 0;">Billet {{ result.productOffer }} pour {{ result.productName }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

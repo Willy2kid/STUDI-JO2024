@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 class="text-center mt-4 mb-4">Double authentification</h5>
+                <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
+                    {% if authenticationError %}
+                        <div class="alert alert-danger">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
+                    {% endif %}
+
+                    {% if availableTwoFactorProviders|length > 1 %}
+                        <p>{{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}:
+                            {% for provider in availableTwoFactorProviders %}
+                                <a href="{{ path("2fa_login", {"preferProvider": provider}) }}">{{ provider }}</a>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <input
+                            id="_auth_code"
+                            type="text"
+                            name="{{ authCodeParameterName }}"
+                            autocomplete="one-time-code"
+                            autofocus
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            class="form-control"
+                            placeholder="Saisir le code reçu par mail"
+                        />
+                    </div>
+
+                    {% if displayTrustedOption %}
+                        <div class="form-group">
+                            <label for="_trusted"><input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" /> {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label>
+                        </div>
+                    {% endif %}
+                    {% if isCsrfProtectionEnabled %}
+                        <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                    {% endif %}
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">
+                                Valider
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p class="cancel"><a href="{{ logoutPath }}">Annuler</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
