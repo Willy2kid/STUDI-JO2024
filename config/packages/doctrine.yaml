@@ -24,7 +24,6 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: false
-        package: doctrine/orm
 
 when@test:
     doctrine:
