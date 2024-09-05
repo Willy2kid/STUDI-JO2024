@@ -20,6 +20,14 @@ class DropboxController extends AbstractController
         $path = '/1.png';
         $temporaryLink = $dropbox->getTemporaryLink($path);
 
+        if ($request->getMethod() === 'POST') {
+            $file = $request->files->get('image');
+            $dropboxFile = new DropboxFile($file->getPathname());
+            $uploadedFile = $dropbox->upload($dropboxFile, "/images/{$file->getClientOriginalName()}", ['autorename' => true]);
+
+            return new Response("Fichier uploadé avec succès !");
+        }
+
         return $this->render('dropbox/image.html.twig', [
             // 'temporaryLink' => $temporaryLink,
             'temporaryLink' => $temporaryLink->link,

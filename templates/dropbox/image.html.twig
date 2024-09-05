@@ -1,3 +1,10 @@
 <!-- templates/dropbox/image.html.twig -->
 
 <img src="{{ temporaryLink }}" alt="Image from Dropbox">
+
+<h1>Uploader une image sur Dropbox</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="image" />
+    <button type="submit">Uploader</button>
+</form>
