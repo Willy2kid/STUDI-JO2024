@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use Kunnu\Dropbox\Dropbox;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Kunnu\Dropbox\Dropbox;
+use Kunnu\Dropbox\DropboxApp;
 
 class DropboxController extends AbstractController
 {
@@ -13,7 +14,8 @@ class DropboxController extends AbstractController
     public function index()
     {
         $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
-        $dropbox = new Dropbox($accessToken);
+        $dropboxApp = new DropboxApp($accessToken);
+        $dropbox = new Dropbox($dropboxApp);
 
         $path = '/1.png';
         $temporaryLink = $dropbox->getTemporaryLink($path);
