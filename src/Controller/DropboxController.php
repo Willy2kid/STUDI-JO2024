@@ -25,7 +25,7 @@ class DropboxController extends AbstractController
         if ($request->getMethod() === 'POST') {
             $file = $request->files->get('image');
             $dropboxFile = new DropboxFile($file->getPathname());
-            $uploadedFile = $dropbox->upload($dropboxFile, "/images/{$file->getClientOriginalName()}", ['autorename' => false]);
+            $uploadedFile = $dropbox->upload($dropboxFile, "/images/{$file->getClientOriginalName()}", ['mode' => 'overwrite']);
 
             return new Response("Fichier uploadé avec succès !");
         }
