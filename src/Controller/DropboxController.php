@@ -15,7 +15,7 @@ class DropboxController extends AbstractController
     #[Route('/dropbox', name: 'dropbox')]
     public function index(Request $request)
     {
-        if (ENV == 'prod') {
+        if (getenv('APP_ENV') == 'prod') {
             $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
             $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
             $dropbox = new Dropbox($dropboxApp);
