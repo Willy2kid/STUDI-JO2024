@@ -14,7 +14,7 @@ class DropboxController extends AbstractController
     public function index()
     {
         $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
-        $dropboxApp = new DropboxApp($accessToken);
+        $app = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
         $path = '/1.png';
