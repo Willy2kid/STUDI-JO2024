@@ -12,7 +12,7 @@ use Kunnu\Dropbox\DropboxApp;
 class DropboxController extends AbstractController
 {
     #[Route('/dropbox', name: 'dropbox')]
-    public function index()
+    public function index(Request $request)
     {
         $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
         $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
