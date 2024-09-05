@@ -21,7 +21,8 @@ class DropboxController extends AbstractController
         $temporaryLink = $dropbox->getTemporaryLink($path);
 
         return $this->render('dropbox/image.html.twig', [
-            'temporaryLink' => $temporaryLink,
+            // 'temporaryLink' => $temporaryLink,
+            'temporaryLink' => $temporaryLink->link,
         ]);
     }
 }
