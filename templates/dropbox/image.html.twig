@@ -2,6 +2,7 @@
 
 {% if app.environment == 'prod' %}
     <img src="{{ temporaryLink }}" alt="Image from Dropbox">
+    <p>Temporary Link: {{ temporaryLink }}</p>
 {% else %}
     <img src="{{ asset('images/product/1.png') }}" alt="Image from localhost" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
 {% endif %}
