@@ -41,13 +41,13 @@ class ImageHandler
         $dropbox = new Dropbox($dropboxApp);
     
         $links = [];
-        $folderContents = $dropbox->listFolder('/' . $imgDir);
+        $folderContents = $dropbox->listFolder('/images/' . $imgDir . '/');
     
         foreach ($items as $item) {
             $fileName = $item->getId() . '.png';
             foreach ($folderContents->getItems() as $file) {
                 if ($file instanceof DropboxFile && $file->getName() === $fileName) {
-                    $path = '/' . $imgDir . '/' . $fileName;
+                    $path = '/images/' . $imgDir . '/' . $fileName;
                     $link = $dropbox->getTemporaryLink($path);
                     $links[$item->getId()] = $link;
                     break;
