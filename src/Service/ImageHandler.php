@@ -44,7 +44,7 @@ class ImageHandler
         $folderContents = $dropbox->listFolder('/images/' . $imgDir . '/');
     
         foreach ($items as $item) {
-            $fileName = $item->getId() . '.png';
+            $fileName = $item->getId();
             foreach ($folderContents->getItems() as $file) {
                 if ($file instanceof DropboxFile && $file->getName() === $fileName) {
                     $path = '/images/' . $imgDir . '/' . $fileName;
