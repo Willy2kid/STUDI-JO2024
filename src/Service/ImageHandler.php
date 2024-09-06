@@ -42,11 +42,14 @@ class ImageHandler
 
         $links = [];
         foreach ($items as $item) {
-            $path = '/' . $imgDir . '/' . $item->getId() . '.png';
-            $metadata = $dropbox->getMetadata($path);
-            if ($metadata['exists']) {
+            $path = $imgDir . '/' . $item->getId() . '.png';
+            try {
                 $link = $dropbox->getTemporaryLink($path);
                 $links[$item->getId()] = $link;
+            } catch (DropboxClientException $e) {
+                // si le fichier n'existe pas, on ne fait rien
+                // ou on peut ajouter un message d'erreur pour indiquer que le fichier n'existe pas
+                // $links[$item->getId()] = 'Fichier non trouvé';
             }
         }
 
