@@ -55,6 +55,9 @@ class ImageHandler
 
                 $name = $file->getName();
                 $this->logger->info('Le fichier est nommé ' . $name . 'sur dropbox et doit être égale à ' . $fileName);
+
+                echo 'Le fichier est nommé ' . $name . 'sur dropbox et doit être égale à ' . $fileName;
+                exit;
                 
                 // if ($file instanceof DropboxFile && $file->getName() === $fileName) {
                 if ($file instanceof DropboxFile && str_replace('.png', '', $file->getName()) === $item->getId()) {
