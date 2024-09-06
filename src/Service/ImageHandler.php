@@ -45,11 +45,16 @@ class ImageHandler
     
         $links = [];
         $folderContents = $dropbox->listFolder('/images/' . $imgDir . '/');
+
+        $this->logger->info('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+        $this->logger->info('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+        echo "CCCCCCCCCCCCCCCCCCCCCCC";
     
         foreach ($items as $item) {
             $fileName = $item->getId() . '.png';
             foreach ($folderContents->getItems() as $file) {
                 $name = $file->getName();
+                $this->logger->info('Le fichier' . $name . 'est présent sur Dropbox');
                 $this->logger->info('Le fichier' . $name . 'est présent sur Dropbox');
                 if ($file instanceof DropboxFile && $file->getName() === $fileName) {
                     $path = '/images/' . $imgDir . '/' . $fileName;
