@@ -2,6 +2,9 @@
 
 namespace App\Service;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Kunnu\Dropbox\Dropbox;
+use Kunnu\Dropbox\DropboxApp;
+use Kunnu\Dropbox\DropboxFile;
 
 class ImageHandler
 {
@@ -29,5 +32,21 @@ class ImageHandler
 
         $image->move($productImgDir, $imageName);
         
+    }
+
+    public function getImageLink($imgDir, $items)
+    {
+        $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
+        $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
+        $dropbox = new Dropbox($dropboxApp);
+
+        $links = [];
+        foreach ($items as $item) {
+            $path = $imgDir . '/' . $item->getId();
+            $link = $dropbox->getTemporaryLink($path);
+            $links[$item->getId()] = $link;
+        }
+
+        return $links;
     }
 }
