@@ -54,7 +54,7 @@ class ImageHandler
             foreach ($folderContents->getItems() as $file) {
 
                 $name = $file->getName();
-                $this->logger->info('Le fichier' . $name . 'est présent sur Dropbox');
+                $this->logger->info('Le fichier est nommé ' . $name . 'sur dropbox et doit être égale à ' . $fileName);
                 
                 // if ($file instanceof DropboxFile && $file->getName() === $fileName) {
                 if ($file instanceof DropboxFile && str_replace('.png', '', $file->getName()) === $item->getId()) {
