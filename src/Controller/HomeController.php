@@ -21,7 +21,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'products' => $products,
-            'links' => $links ?? [],
+            'productsImgLinks' => $productsImgLinks ?? [],
         ]);
     }
 }
