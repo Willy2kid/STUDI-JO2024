@@ -5,14 +5,17 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
+use Psr\Log\LoggerInterface;
 
 class ImageHandler
 {
     private $kernel;
+    private $logger;
 
     public function __construct(KernelInterface $kernel,)
     {
         $this->kernel = $kernel;
+        $this->logger = $logger;
     }
 
     public function uploadImage($image, $productId)
@@ -44,8 +47,10 @@ class ImageHandler
         $folderContents = $dropbox->listFolder('/images/' . $imgDir . '/');
     
         foreach ($items as $item) {
-            $fileName = $item->getId();
+            $fileName = $item->getId() . '.png';
             foreach ($folderContents->getItems() as $file) {
+                $name = $file->getName();
+                $this->logger->info('Le fichier' . $name . 'est présent sur Dropbox');
                 if ($file instanceof DropboxFile && $file->getName() === $fileName) {
                     $path = '/images/' . $imgDir . '/' . $fileName;
                     $link = $dropbox->getTemporaryLink($path);
