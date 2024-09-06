@@ -52,7 +52,7 @@ class ImageHandler
             // $filePath = '/images/' . $imgDir . '/' . $fileName;
             // $folderPath = '/images/' . $imgDir . '/';
             $fileName = '1';
-            $folderPath = '/images/product/';
+            $folderPath = '/images/product';
             $searchResult = $dropbox->search($folderPath, $fileName);
             // $metadata = $dropbox->getMetadata($path);
             $path = '/images/product/1.png';
