@@ -21,6 +21,12 @@ class ImageHandler
             mkdir($productImgDir, 0777, true);
         }
 
+        // Check if the image already exists
+        $imagePath = $productImgDir . $imageName;
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $image->move($productImgDir, $imageName);
         
     }
