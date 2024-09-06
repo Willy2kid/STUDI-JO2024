@@ -48,9 +48,11 @@ class ImageHandler
         // exit; // or die;
     
         foreach ($items as $item) {
-            $fileName = $item->getId() . '.png';
-            $filePath = '/images/' . $imgDir . '/' . $fileName;
-            $folderPath = '/images/' . $imgDir . '/';
+            // $fileName = $item->getId() . '.png';
+            // $filePath = '/images/' . $imgDir . '/' . $fileName;
+            // $folderPath = '/images/' . $imgDir . '/';
+            $fileName = '1.png';
+            $folderPath = '/images/product/';
             $searchResult = $dropbox->search($folderPath, $fileName);
             // $metadata = $dropbox->getMetadata($path);
 
