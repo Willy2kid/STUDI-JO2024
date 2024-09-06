@@ -5,17 +5,15 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
-use Psr\Log\LoggerInterface;
 
 class ImageHandler
 {
     private $kernel;
     private $logger;
 
-    public function __construct(KernelInterface $kernel, LoggerInterface $logger)
+    public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-        $this->logger = $logger;
     }
 
     public function uploadImage($image, $productId)
@@ -51,22 +49,26 @@ class ImageHandler
     
         foreach ($items as $item) {
             $fileName = $item->getId() . '.png';
-            foreach ($folderContents->getItems() as $file) {
+            $searchResult = $dropbox->search('/images/' . $imgDir . '/', $fileName);
 
-                $name = $file->getName();
-                $this->logger->info('Le fichier est nommé ' . $name . 'sur dropbox et doit être égale à ' . $fileName);
-
-                echo 'Le fichier est nommé ' . $name . 'sur dropbox et doit être égale à ' . $fileName;
-                exit;
-                
-                // if ($file instanceof DropboxFile && $file->getName() === $fileName) {
-                if ($file instanceof DropboxFile && str_replace('.png', '', $file->getName()) === $item->getId()) {
-                    $path = '/images/' . $imgDir . '/' . $fileName;
-                    $link = $dropbox->getTemporaryLink($path);
-                    $links[$item->getId()] = $link;
-                    break;
-                }
+            if ($searchResult && $searchResult->getEntries()) {
+                $links[] = $dropbox->getTemporaryLink($searchResult->getEntries()->first()->getPath());
+                // echo 'Lien généré pour ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
             }
+
+            // foreach ($folderContents->getItems() as $file) {
+            // 
+            //     $name = $file->getName();
+            //     echo 'Le fichier est nommé ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
+            //     exit;
+            //     
+            //     if ($file instanceof DropboxFile && $file->getName() === $fileName) {
+            //         $path = '/images/' . $imgDir . '/' . $fileName;
+            //         $link = $dropbox->getTemporaryLink($path);
+            //         $links[$item->getId()] = $link;
+            //         break;
+            //     }
+            // }
         }
     
         return $links;
