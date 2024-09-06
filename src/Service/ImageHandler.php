@@ -39,25 +39,22 @@ class ImageHandler
         $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
         $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
         $dropbox = new Dropbox($dropboxApp);
-
+    
         $links = [];
+        $folderContents = $dropbox->listFolder('/' . $imgDir);
+    
         foreach ($items as $item) {
-            $path = '/' . $imgDir . '/' . $item->getId() . '.png';
-            try {
-                $metadata = $dropbox->getMetadata($path);
-                if ($metadata['exists']) {
+            $fileName = $item->getId() . '.png';
+            foreach ($folderContents->getItems() as $file) {
+                if ($file instanceof DropboxFile && $file->getName() === $fileName) {
+                    $path = '/' . $imgDir . '/' . $fileName;
                     $link = $dropbox->getTemporaryLink($path);
                     $links[$item->getId()] = $link;
-                } else {
-                    // Return a default image link or a placeholder image
-                    $links[$item->getId()] = 'https://example.com/default-image.png';
+                    break;
                 }
-            } catch (DropboxClientException $e) {
-                // Return a default image link or a placeholder image
-                $links[$item->getId()] = 'https://example.com/default-image.png';
             }
         }
-
+    
         return $links;
     }
 }
