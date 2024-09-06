@@ -42,7 +42,7 @@ class ImageHandler
 
         $links = [];
         foreach ($items as $item) {
-            $path = $imgDir . '/' . $item->getId() . '.png';
+            $path = '/' . $imgDir . '/' . $item->getId() . '.png';
             try {
                 $link = $dropbox->getTemporaryLink($path);
                 $links[$item->getId()] = $link;
