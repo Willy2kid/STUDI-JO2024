@@ -49,6 +49,7 @@ class ImageHandler
         $this->logger->info('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
         $this->logger->info('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
         echo "CCCCCCCCCCCCCCCCCCCCCCC";
+        dump('DDDDDDDDDDDDDDD');
     
         foreach ($items as $item) {
             $fileName = $item->getId() . '.png';
