@@ -51,9 +51,11 @@ class ImageHandler
             $fileName = $item->getId() . '.png';
             // $path = '/images/' . $imgDir . '/';
             $path = '/images/' . $imgDir . '/' . $fileName;
-            $searchResult = $dropbox->search($path);
+            // $searchResult = $dropbox->search($path);
+            $metadata = $dropbox->getMetadata($path);
 
-            if ($searchResult) {
+            // if ($searchResult) {
+            if ($metadata) {
                 $links[] = $dropbox->getTemporaryLink($path);
                 // $links[] = $dropbox->getTemporaryLink($searchResult->getItems()->first()->getPath());
                 // echo 'Lien généré pour ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
