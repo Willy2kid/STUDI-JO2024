@@ -50,14 +50,14 @@ class ImageHandler
         // exit; // or die;
     
         foreach ($items as $item) {
-            // $fileName = $item->getId() . '.png';
-            $fileName = basename($item->getId() . '.png');
+            $fileName = $item->getId() . '.png';
             foreach ($folderContents->getItems() as $file) {
 
                 $name = $file->getName();
                 $this->logger->info('Le fichier' . $name . 'est présent sur Dropbox');
-
-                if ($file instanceof DropboxFile && $file->getName() === $fileName) {
+                
+                // if ($file instanceof DropboxFile && $file->getName() === $fileName) {
+                if ($file instanceof DropboxFile && str_replace('.png', '', $file->getName()) === $item->getId()) {
                     $path = '/images/' . $imgDir . '/' . $fileName;
                     $link = $dropbox->getTemporaryLink($path);
                     $links[$item->getId()] = $link;
