@@ -49,10 +49,12 @@ class ImageHandler
     
         foreach ($items as $item) {
             $fileName = $item->getId() . '.png';
-            $searchResult = $dropbox->search('/images/' . $imgDir, $fileName);
+            $path = '/images/' . $imgDir . '/';
+            $searchResult = $dropbox->search($path, $fileName);
 
             if ($searchResult) {
-                $links[] = $dropbox->getTemporaryLink($searchResult->getEntries()->first()->getPath());
+                $links[] = $dropbox->getTemporaryLink($path . $fileName);
+                // $links[] = $dropbox->getTemporaryLink($searchResult->getItems()->first()->getPath());
                 // echo 'Lien généré pour ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
             }
 
