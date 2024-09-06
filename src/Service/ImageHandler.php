@@ -60,7 +60,7 @@ class ImageHandler
             if ($searchResult) {
             // if ($metadata) {
                 $link = $dropbox->getTemporaryLink($path);
-                $links[$item->getId()] = $link->getUrl();
+                $links[$item->getId()] = $link->url;
                 // $links[] = $dropbox->getTemporaryLink($searchResult->getItems()->first()->getPath());
                 // echo 'Lien généré pour ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
             }
