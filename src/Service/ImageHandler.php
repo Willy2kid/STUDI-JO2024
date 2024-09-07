@@ -22,8 +22,8 @@ class ImageHandler
         $this->dropboxService = $dropboxService;
         // $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
         // $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
-        $this->appSecret = $parameterBag->get('env(DROPBOX_APP_SECRET)');
-        $this->appKey = $parameterBag->get('env(DROPBOX_KEY)');
+        // $this->appSecret = $parameterBag->get('env(DROPBOX_APP_SECRET)');
+        // $this->appKey = $parameterBag->get('env(DROPBOX_APP_KEY)');
         dump($this->appKey, $this->appSecret);
     }
 
@@ -49,7 +49,7 @@ class ImageHandler
     public function getImageLink($imgDir, $items, string $accessToken, ParameterBagInterface $parameterBag)
     {
         $appSecret = getenv('DROPBOX_APP_SECRET');
-        $appKey = getenv('DROPBOX_KEY');
+        $appKey = getenv('DROPBOX_APP_KEY');
         $dropboxApp = new DropboxApp($appKey, $appSecret, $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
