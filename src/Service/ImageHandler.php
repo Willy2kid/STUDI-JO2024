@@ -23,7 +23,7 @@ class ImageHandler
         // $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
         // $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
         $this->appSecret = $parameterBag->get('env(DROPBOX_APP_SECRET)');
-        $this->appKey = $parameterBag->get('env(DROPBOX_APP_KEY)');
+        $this->appKey = $parameterBag->get('env(DROPBOX_KEY)');
         dump($this->appKey, $this->appSecret);
     }
 
