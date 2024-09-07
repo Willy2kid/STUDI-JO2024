@@ -80,6 +80,7 @@ class ImageHandler
             $this->logger->log(LogLevel::INFO, "No files found in folder $folderPath");
         } else {
             $this->logger->log(LogLevel::INFO, "fichiers présent sur dropbox");
+            $this->logger->log(LogLevel::INFO, "Files in folder $folderPath:", $files);
         }
 
         foreach ($files as $file) {
