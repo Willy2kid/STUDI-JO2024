@@ -72,27 +72,36 @@ class ImageHandler
 
         $links = [];
         $folderPath = '/images/' . $imgDir;
+        $files = $dropbox->listFolder($folderPath);
 
-        // Batch the API calls to reduce the number of calls made
-        $batch = [];
-        foreach ($items as $item) {
-            $fileName = $item->getId() . '.png';
-            $batch[] = $fileName;
+        foreach ($files as $file) {
+            $fileName = '1.png';
+            if ($file->getName() === $fileName)
+            {
+                $fileMetadata = $dropbox->getFileMetadata($file->getPath());
+                $link = $dropbox->createTemporaryDirectLink($fileMetadata->getPath())->getLink();
+                $links[$file->getName()] = $link;
+            }
         }
 
-        // Make a single API call to search for all files in the batch
-        $searchResult = $dropbox->search($folderPath, implode(',', $batch));
-
-        // Loop through the search results and get the temporary link for each file
-        foreach ($searchResult->getItems() as $file) {
-            $link = $dropbox->getTemporaryLink($file->getPath());
-            $links[$file->getName()] = $link->url;
-        }
-        
         $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
-        $this->logger->log(LogLevel::INFO, 'Hello World');
         $this->logger->log(LogLevel::INFO, 'tableau des liens: ' . count($links));
 
         return $links;
+
+        // // Batch the API calls to reduce the number of calls made
+        // $batch = [];
+        // foreach ($items as $item) {
+        //     $fileName = $item->getId() . '.png';
+        //     $batch[] = $fileName;
+        // 
+        // // Make a single API call to search for all files in the batch
+        // $searchResult = $dropbox->search($folderPath, implode(',', $batch))     // 
+        // // Loop through the search results and get the temporary link for each file
+        // foreach ($searchResult->getItems() as $file) {
+        //     $link = $dropbox->getTemporaryLink($file->getPath())->getLink();
+        //     $links[$file->getName()] = $link->url;
+        // }
+
     }
 }
