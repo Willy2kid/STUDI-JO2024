@@ -53,35 +53,17 @@ class ImageHandler
             $fileName = $item->getId() . '.png';
             $filePath = '/images/' . $imgDir . '/' . $fileName;
             $folderPath = '/images/' . $imgDir;
-            // $fileName = '1';
-            // $folderPath = '/images/product';
             $searchResult = $dropbox->search($folderPath, $fileName);
-            // $metadata = $dropbox->getMetadata($path);
             $path = '/images/product/1.png';
 
             if ($searchResult) {
-            // if ($metadata) {
                 $link = $dropbox->getTemporaryLink($path);
                 $links[$item->getId()] = $link->url;
                 // $links[] = $dropbox->getTemporaryLink($searchResult->getItems()->first()->getPath());
                 // echo 'Lien généré pour ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
             }
-
-            // foreach ($folderContents->getItems() as $file) {
-            // 
-            //     $name = $file->getName();
-            //     echo 'Le fichier est nommé ' . $name . ' sur dropbox et doit être égale à ' . $fileName;
-            //     exit;
-            //     
-            //     if ($file instanceof DropboxFile && $file->getName() === $fileName) {
-            //         $path = '/images/' . $imgDir . '/' . $fileName;
-            //         $link = $dropbox->getTemporaryLink($path);
-            //         $links[$item->getId()] = $link;
-            //         break;
-            //     }
-            // }
         }
-        $this->logger->info('tableau des liens: '. print_r($links, true));
+        $this->logger->info('tableau des liens: ' . count($links));
         return $links;
     }
 }
