@@ -70,12 +70,15 @@ class ImageHandler
         $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
+        $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
+
         $links = [];
         $folderPath = '/images/' . $imgDir;
         $files = $dropbox->listFolder($folderPath);
 
         foreach ($files as $file) {
             $fileName = '1.png';
+            $this->logger->log(LogLevel::INFO, 'le nom du ficher dropbox est ' . $file->getName());
             if ($file->getName() === $fileName)
             {
                 $fileMetadata = $dropbox->getFileMetadata($file->getPath());
@@ -84,7 +87,6 @@ class ImageHandler
             }
         }
 
-        $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
         $this->logger->log(LogLevel::INFO, 'tableau des liens: ' . count($links));
 
         return $links;
