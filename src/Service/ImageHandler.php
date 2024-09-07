@@ -6,6 +6,7 @@ use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class ImageHandler
 {
@@ -87,10 +88,10 @@ class ImageHandler
             $link = $dropbox->getTemporaryLink($file->getPath());
             $links[$file->getName()] = $link->url;
         }
-
-        $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LoggerInterface::INFO));
-        $this->logger->info('Hello World');
-        $this->logger->info('tableau des liens: ' . count($links));
+        
+        $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
+        $this->logger->log(LogLevel::INFO, 'Hello World');
+        $this->logger->log(LogLevel::INFO, 'tableau des liens: ' . count($links));
 
         return $links;
     }
