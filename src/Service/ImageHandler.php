@@ -91,7 +91,7 @@ class ImageHandler
             $fileName = $file->getName();
             $filePath = $folderPath . $fileName;
             $this->logger->log(LogLevel::INFO, 'le ficher dropbox est ' . $filePath);
-            if (in_array($fileName, $itemIds, true)) {
+            if (array_search($fileName, $itemIds) !== false) {
                 $link = $dropbox->getTemporaryLink($filePath)->getLink();
                 $this->logger->log(LogLevel::INFO, 'Lien généré pour le fichier ' . $filePath . ' : ' . $link);
                 $links[$fileName] = $link;
