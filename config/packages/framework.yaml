@@ -14,6 +14,3 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
-
-parameters:
-    env(DROPBOX_APP_SECRET): '%env(DROPBOX_APP_SECRET)%'
