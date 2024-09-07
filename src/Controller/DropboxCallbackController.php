@@ -17,7 +17,7 @@ class DropboxCallbackController extends AbstractController
     }
 
     #[Route('/dropbox/callback', name: 'dropbox_callback')]
-    public function callback(Request $request)
+    public function index(Request $request)
     {
         $this->dropboxService->callback();
         return $this->dropboxService->callback($request);
