@@ -13,11 +13,15 @@ class ImageHandler
 {
     private $kernel;
     private $dropboxService;
+    private $appKey;
+    private $appSecret;
 
-    public function __construct(KernelInterface $kernel, DropboxService $dropboxService)
+    public function __construct(KernelInterface $kernel, DropboxService $dropboxService, ParameterBagInterface $parameterBag)
     {
         $this->kernel = $kernel;
         $this->dropboxService = $dropboxService;
+        $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
+        $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
     }
 
     public function uploadImage($image, $productId)
@@ -41,11 +45,7 @@ class ImageHandler
 
     public function getImageLink($imgDir, $items, string $accessToken, ParameterBagInterface $parameterBag)
     {
-        $appKey = $parameterBag->get('DROPBOX_APP_KEY');
-        $appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
-        $redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
-
-        $dropboxApp = new DropboxApp($appKey, $appSecret, $accessToken);
+        $dropboxApp = new DropboxApp($this->appKey, $this->appSecret, $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
         $links = [];
