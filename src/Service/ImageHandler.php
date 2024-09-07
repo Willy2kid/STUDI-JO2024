@@ -72,6 +72,11 @@ class ImageHandler
 
         $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
 
+        $itemIds = [];
+        foreach ($items as $item) {
+            $itemIds[] = $item->getId();
+        }
+
         $links = [];
         $folderPath = '/images/' . $imgDir .'/';
         $files = $dropbox->listFolder($folderPath)->getItems();
@@ -83,15 +88,24 @@ class ImageHandler
         }
 
         foreach ($files as $file) {
-            $fileName = '1.png';
-            $path = '/images/product/1.png';
-            $this->logger->log(LogLevel::INFO, 'le nom du ficher dropbox est ' . $file->getName());
-            if ($file->getName() === $fileName)
-            {
-                $link = $dropbox->getTemporaryLink($path)->getLink();
-                $this->logger->log(LogLevel::INFO, 'Lien généré : ' . $link);
-                $links[$file->getName()] = $link;
+            $fileName = $file->getName();
+            $filePath = $folderPath . $fileName;
+            $this->logger->log(LogLevel::INFO, 'le ficher dropbox est ' . $filePath);
+            if (in_array($fileName, $itemIds)) {
+                $link = $dropbox->getTemporaryLink($filePath)->getLink();
+                $this->logger->log(LogLevel::INFO, 'Lien généré pour le fichier ' . $filePath . ' : ' . $link);
+                $links[$fileName] = $link;
             }
+
+            // $fileName = '1.png';
+            // $path = '/images/product/1.png';
+            // $this->logger->log(LogLevel::INFO, 'le nom du ficher dropbox est ' . $file->getName());
+            // if ($file->getName() === $fileName)
+            // {
+            //     $link = $dropbox->getTemporaryLink($path)->getLink();
+            //     $this->logger->log(LogLevel::INFO, 'Lien généré pour le fichier ' . $file->getName() . ' : ' . $link);
+            //     $links[$file->getName()] = $link;
+            // }
         }
 
         $this->logger->log(LogLevel::INFO, 'tableau des liens: ' . count($links));
