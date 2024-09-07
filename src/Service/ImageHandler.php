@@ -87,8 +87,8 @@ class ImageHandler
             $this->logger->log(LogLevel::INFO, 'le nom du ficher dropbox est ' . $file->getName());
             if ($file->getName() === $fileName)
             {
-                $fileMetadata = $dropbox->getFileMetadata($file->getPath());
-                $link = $dropbox->createTemporaryDirectLink($fileMetadata->getPath())->getLink();
+                // $fileMetadata = $dropbox->getFileMetadata($file->getPath());
+                $link = $dropbox->createTemporaryDirectLink($file->getPath())->getLink();
                 $links[$file->getName()] = $link;
             }
         }
