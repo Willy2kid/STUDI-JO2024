@@ -84,11 +84,12 @@ class ImageHandler
 
         foreach ($files as $file) {
             $fileName = '1.png';
+            $path = '/images/product/1.png';
             $this->logger->log(LogLevel::INFO, 'le nom du ficher dropbox est ' . $file->getName());
             if ($file->getName() === $fileName)
             {
-                // $fileMetadata = $dropbox->getFileMetadata($file->getPath());
-                $link = $dropbox->getTemporaryLink($folderPath . $fileName)->getLink();
+                $link = $dropbox->getTemporaryLink($path)->getLink();
+                $this->logger->log(LogLevel::INFO, 'Lien généré : ' . $link);
                 $links[$file->getName()] = $link;
             }
         }
