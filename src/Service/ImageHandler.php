@@ -55,7 +55,6 @@ class ImageHandler
             }
         }
 
-        $this->logger->log(LogLevel::INFO, 'tableau des liens: ' . count($links));
         return $links;
     }
 }
