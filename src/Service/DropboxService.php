@@ -51,8 +51,8 @@ class DropboxService
     public function callback(Request $request)
     {
         // Récupérer le code d'accès
-        // $code = $request->query->get('code');
-        $code = $this->getAccessCode();
+        $code = 'pbaDUVvIPpkAAAAAAAAAIL-p6hqzraEDT2nps1q2RMg';
+        // $code = $this->getAccessCode();
 
         // Échanger le code d'accès contre un token d'accès
         $token = $this->getAccessToken($code);
