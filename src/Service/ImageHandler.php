@@ -73,8 +73,14 @@ class ImageHandler
         $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
 
         $links = [];
-        $folderPath = '/images/' . $imgDir;
+        $folderPath = '/images/' . $imgDir .'/';
         $files = $dropbox->listFolder($folderPath);
+
+        if (count($files) === 0) {
+            $this->logger->log(LogLevel::INFO, "No files found in folder $folderPath");
+        } else {
+            $this->logger->log(LogLevel::INFO, "fichiers présent sur dropbox");
+        }
 
         foreach ($files as $file) {
             $fileName = '1.png';
