@@ -88,7 +88,7 @@ class ImageHandler
             $links[$file->getName()] = $link->url;
         }
 
-        // Reduce logging to improve performance
+        $this->logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LoggerInterface::INFO));
         $this->logger->info('Hello World');
         $this->logger->info('tableau des liens: ' . count($links));
 
