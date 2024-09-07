@@ -63,7 +63,7 @@ class ImageHandler
     private function getAccessToken(){
         $appKey = 't03ew4kslhdea50';
         $appSecret = 'lzizv35rwznpive';
-        $accessToken = 'pbaDUVvIPpkAAAAAAAAAGYZREap7SZQYcemuktNzr48';
+        $accessToken = 'pbaDUVvIPpkAAAAAAAAAGteGYoA5yZEWUuLg65Q9OXE';
 
         $client = new Client();
 
