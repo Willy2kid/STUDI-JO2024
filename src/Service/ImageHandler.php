@@ -49,7 +49,7 @@ class ImageHandler
     public function getImageLink($imgDir, $items, string $accessToken, ParameterBagInterface $parameterBag)
     {
         $appSecret = getenv('DROPBOX_APP_SECRET');
-        $appKey = getenv('DROPBOX_APP_KEY');
+        $appKey = getenv('DROPBOX_KEY');
         $dropboxApp = new DropboxApp($appKey, $appSecret, $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
