@@ -27,7 +27,7 @@ class DropboxService
         $appKey = getenv('DROPBOX_APP_KEY');
         $appSecret = getenv('DROPBOX_APP_SECRET');
         $redirectUri = getenv('DROPBOX_REDIRECT_URI');
-        
+
         $uri = 'https://www.dropbox.com/oauth2/authorize';
         $queryParams = [
             'client_id' => $this->appKey,
@@ -79,7 +79,7 @@ class DropboxService
             $token = json_decode($response->getBody()->getContents(), true)['access_token'];
             return $token;
         } else {
-            echo "Erreur lors de la récupération du token d'accès";
+            throw new \Exception('Erreur lors de la récupération du token d\'accès');
         }
     }
 }
