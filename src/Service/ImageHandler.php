@@ -88,7 +88,7 @@ class ImageHandler
             if ($file->getName() === $fileName)
             {
                 // $fileMetadata = $dropbox->getFileMetadata($file->getPath());
-                $link = $dropbox->getTemporaryLink($file->getPath())->getLink();
+                $link = $dropbox->getTemporaryLink($folderPath . $fileName)->getLink();
                 $links[$file->getName()] = $link;
             }
         }
