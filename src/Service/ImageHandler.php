@@ -2,6 +2,7 @@
 
 namespace App\Service;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
@@ -38,14 +39,12 @@ class ImageHandler
         
     }
 
-    public function getImageLink($imgDir, $items)
+    public function getImageLink($imgDir, $items, string $accessToken, ParameterBagInterface $parameterBag)
     {
-        $appKey = $_ENV['DROPBOX_APP_KEY'];
-        $appSecret = $_ENV['DROPBOX_APP_SECRET'];
-        $redirectUri = $_ENV['DROPBOX_REDIRECT_URI'];
-        $request = Request::createFromGlobals();
-        $accessToken = $request->getSession()->get('dropbox_access_token');
-        
+        $appKey = $parameterBag->get('DROPBOX_APP_KEY');
+        $appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
+        $redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
+
         $dropboxApp = new DropboxApp($appKey, $appSecret, $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
