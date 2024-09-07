@@ -20,8 +20,10 @@ class ImageHandler
     {
         $this->kernel = $kernel;
         $this->dropboxService = $dropboxService;
-        $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
-        $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
+        // $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
+        // $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
+        $this->appKey = $parameterBag->get('env(DROPBOX_APP_KEY)');
+        $this->appSecret = $parameterBag->get('env(DROPBOX_APP_SECRET)');
     }
 
     public function uploadImage($image, $productId)
