@@ -24,6 +24,7 @@ class ImageHandler
         // $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
         $this->appKey = $parameterBag->get('env(DROPBOX_APP_KEY)');
         $this->appSecret = $parameterBag->get('env(DROPBOX_APP_SECRET)');
+        dump($this->appKey, $this->appSecret);
     }
 
     public function uploadImage($image, $productId)
