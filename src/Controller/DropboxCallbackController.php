@@ -10,7 +10,7 @@ use App\Service\DropboxService;
 class DropboxCallbackController extends AbstractController
 {
     #[Route('/dropbox/callback', name: 'dropbox_callback')]
-    public function callback(DropboxService $dropboxService)
+    public function callback(DropboxService $dropboxService): Response
     {
         $dropboxService->callback();
         // return $dropboxService->callback($request);
