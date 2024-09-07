@@ -83,8 +83,7 @@ class ImageHandler
             $responseData = json_decode($response->getBody()->getContents(), true);
             $token = $responseData['access_token'];
         
-            // Utilisez le token d'accès pour accéder à l'API Dropbox
-            echo "Token d'accès : $token";
+            return $token;
         } else {
             echo "Erreur lors de la récupération du token d'accès";
         }
