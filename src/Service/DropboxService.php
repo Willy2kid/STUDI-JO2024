@@ -50,6 +50,7 @@ class DropboxService
 
     public function callback(Request $request)
     {
+        $logger->info('Callback method called!');
         // Récupérer le code d'accès
         $code = 'pbaDUVvIPpkAAAAAAAAAIL-p6hqzraEDT2nps1q2RMg';
         // $code = $this->getAccessCode();
