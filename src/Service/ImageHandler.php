@@ -5,6 +5,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
+use GuzzleHttp\Client;
 
 class ImageHandler
 {
@@ -36,7 +37,8 @@ class ImageHandler
 
     public function getImageLink($imgDir, $items)
     {
-        $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
+        // $accessToken = getenv('DROPBOX_ACCESS_TOKEN');
+        $accessToken = $this->getAccessToken();
         $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
@@ -56,5 +58,35 @@ class ImageHandler
         }
 
         return $links;
+    }
+
+    private function getAccessToken(){
+        $appKey = 't03ew4kslhdea50';
+        $appSecret = 'lzizv35rwznpive';
+        $accessToken = 'pbaDUVvIPpkAAAAAAAAAFwNCeE4XGA9sD0JKOnbbhmM';
+
+        $client = new Client();
+
+        $response = $client->post('https://api.dropboxapi.com/oauth2/token', [
+            'auth' => [$appKey, $appSecret],
+            'form_params' => [
+                'code' => $accessToken,
+                'grant_type' => 'authorization_code',
+            ],
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+        ]);
+
+        // Vérifiez si la réponse est réussie
+        if ($response->getStatusCode() === 200) {
+            $responseData = json_decode($response->getBody()->getContents(), true);
+            $token = $responseData['access_token'];
+        
+            // Utilisez le token d'accès pour accéder à l'API Dropbox
+            echo "Token d'accès : $token";
+        } else {
+            echo "Erreur lors de la récupération du token d'accès";
+        }
     }
 }

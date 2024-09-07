@@ -10,6 +10,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",
         "endroid/qr-code-bundle": "^5.0",
+        "guzzlehttp/guzzle": "^7.9",
         "intervention/image": "^3.7",
         "kunalvarma05/dropbox-php-sdk": "^0.5.0",
         "monolog/monolog": "^3.7",
