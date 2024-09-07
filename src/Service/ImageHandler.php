@@ -74,14 +74,12 @@ class ImageHandler
 
         $links = [];
         $folderPath = '/images/' . $imgDir .'/';
-        $files = $dropbox->listFolder($folderPath);
+        $files = $dropbox->listFolder($folderPath)->getItems();
 
         if (empty($files)) {
             $this->logger->log(LogLevel::INFO, "No files found in folder $folderPath");
         } else {
             $this->logger->log(LogLevel::INFO, "fichiers présent sur dropbox");
-            echo $files;
-            die();
         }
 
         foreach ($files as $file) {
