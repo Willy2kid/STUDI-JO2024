@@ -84,14 +84,14 @@ class ImageHandler
         if (empty($files)) {
             $this->logger->log(LogLevel::INFO, "No files found in folder $folderPath");
         } else {
-            $this->logger->log(LogLevel::INFO, "fichiers présent sur dropbox");
+            $this->logger->log(LogLevel::INFO, "des fichiers sont présents sur dropbox");
         }
 
         foreach ($files as $file) {
             $fileName = $file->getName();
             $filePath = $folderPath . $fileName;
             $this->logger->log(LogLevel::INFO, 'le ficher dropbox est ' . $filePath);
-            if (in_array($fileName, $itemIds)) {
+            if (in_array($fileName, $itemIds, true)) {
                 $link = $dropbox->getTemporaryLink($filePath)->getLink();
                 $this->logger->log(LogLevel::INFO, 'Lien généré pour le fichier ' . $filePath . ' : ' . $link);
                 $links[$fileName] = $link;
