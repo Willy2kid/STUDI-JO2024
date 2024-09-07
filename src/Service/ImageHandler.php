@@ -90,11 +90,12 @@ class ImageHandler
         foreach ($files as $file) {
             $fileName = $file->getName();
             $filePath = $folderPath . $fileName;
+            $fileNameNoExt = str_replace('.png', '', $fileName);
             $this->logger->log(LogLevel::INFO, 'le ficher dropbox est ' . $filePath);
-            if (array_search($fileName, $itemIds) !== false) {
+            if (in_array($fileNameNoExt, $itemIds)) {
                 $link = $dropbox->getTemporaryLink($filePath)->getLink();
                 $this->logger->log(LogLevel::INFO, 'Lien généré pour le fichier ' . $filePath . ' : ' . $link);
-                $links[$fileName] = $link;
+                $links[$fileNameNoExt] = $link;
             }
 
             // $fileName = '1.png';
