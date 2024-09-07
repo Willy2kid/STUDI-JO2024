@@ -48,7 +48,8 @@ class DropboxService
         return new RedirectResponse($redirectUri);
     }
 
-    public function callback(Request $request)
+    // public function callback(Request $request)
+    public function callback()
     {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', LogLevel::INFO));
         $logger->info('Callback method called!');
