@@ -10,20 +10,24 @@ use GuzzleHttp\Client;
 class DropboxService
 {
     private $client;
-    private $appKey;
-    private $appSecret;
-    private $redirectUri;
+    // private $appKey;
+    // private $appSecret;
+    // private $redirectUri;
 
     public function __construct(Client $client, ParameterBagInterface $parameterBag)
     {
         $this->client = $client;
-        $this->appSecret = $parameterBag->get('env(DROPBOX_APP_KEY)');
-        $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
-        $this->redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
+        // $this->appSecret = $parameterBag->get('(DROPBOX_APP_KEY)');
+        // $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
+        // $this->redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
     }
 
     public function getAccessCode()
     {
+        $appKey = getenv('DROPBOX_APP_KEY');
+        $appSecret = getenv('DROPBOX_APP_SECRET');
+        $redirectUri = getenv('DROPBOX_REDIRECT_URI');
+        
         $uri = 'https://www.dropbox.com/oauth2/authorize';
         $queryParams = [
             'client_id' => $this->appKey,
@@ -53,6 +57,10 @@ class DropboxService
 
     private function getAccessToken($code)
     {
+        $appKey = getenv('DROPBOX_APP_KEY');
+        $appSecret = getenv('DROPBOX_APP_SECRET');
+        $redirectUri = getenv('DROPBOX_REDIRECT_URI');
+
         $uri = 'https://api.dropboxapi.com/oauth2/token';
         $queryParams = [
             'grant_type' => 'authorization_code',
