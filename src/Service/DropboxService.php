@@ -37,13 +37,13 @@ class DropboxService
     {
         // Récupérer le code d'accès
         $code = $request->query->get('code');
-        
+
         // Échanger le code d'accès contre un token d'accès
         $token = $this->getAccessToken($code);
-        
+
         // Stocker le token d'accès dans une variable de session
         $request->getSession()->set('dropbox_access_token', $token);
-        
+
         return new Response('Callback réussi !');
     }
 
