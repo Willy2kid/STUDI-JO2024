@@ -17,7 +17,7 @@ class DropboxService
     public function __construct(Client $client, ParameterBagInterface $parameterBag)
     {
         $this->client = $client;
-        $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
+        $this->appKey = $parameterBag->get('DROPBOX_KEY');
         $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
         $this->redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
     }
