@@ -4,18 +4,22 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use GuzzleHttp\Client;
 
 class DropboxService
 {
     private $client;
+    private $appKey;
+    private $appSecret;
+    private $redirectUri;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, ParameterBagInterface $parameterBag)
     {
-        $this->appKey = 't03ew4kslhdea50';
-        $this->appSecret = 'lzizv35rwznpive';
-        $this->redirectUri = 'https://studi-jo2024-d5bf273d2fbf.herokuapp.com/dropbox/callback';
         $this->client = $client;
+        $this->appKey = $parameterBag->get('DROPBOX_APP_KEY');
+        $this->appSecret = $parameterBag->get('DROPBOX_APP_SECRET');
+        $this->redirectUri = $parameterBag->get('DROPBOX_REDIRECT_URI');
     }
 
     public function getAccessCode()

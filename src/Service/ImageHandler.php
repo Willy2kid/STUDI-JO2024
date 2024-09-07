@@ -40,9 +40,13 @@ class ImageHandler
 
     public function getImageLink($imgDir, $items)
     {
+        $appKey = $_ENV['DROPBOX_APP_KEY'];
+        $appSecret = $_ENV['DROPBOX_APP_SECRET'];
+        $redirectUri = $_ENV['DROPBOX_REDIRECT_URI'];
         $request = Request::createFromGlobals();
         $accessToken = $request->getSession()->get('dropbox_access_token');
-        $dropboxApp = new DropboxApp("t03ew4kslhdea50", "lzizv35rwznpive", $accessToken);
+        
+        $dropboxApp = new DropboxApp($appKey, $appSecret, $accessToken);
         $dropbox = new Dropbox($dropboxApp);
 
         $links = [];
