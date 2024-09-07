@@ -5,15 +5,17 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
+use Psr\Log\LoggerInterface;
 
 class ImageHandler
 {
     private $kernel;
     private $logger;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, LoggerInterface $logger)
     {
         $this->kernel = $kernel;
+        $this->logger = $logger;
     }
 
     public function uploadImage($image, $productId)
@@ -79,7 +81,7 @@ class ImageHandler
             //     }
             // }
         }
-    
+        $this->logger->info('tableau des liens: '. print_r($links, true));
         return $links;
     }
 }
