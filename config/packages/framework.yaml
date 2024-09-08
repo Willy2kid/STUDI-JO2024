@@ -8,6 +8,8 @@ framework:
 
     #esi: true
     #fragments: true
+    router:
+        default_uri_scheme: https
 
 when@test:
     framework:
