@@ -30,7 +30,8 @@
         "symfony/security-csrf": "7.1.*",
         "symfony/uid": "7.1.*",
         "symfony/validator": "7.1.*",
-        "symfony/yaml": "7.1.*"
+        "symfony/yaml": "7.1.*",
+        "ext-gd": "*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2",
