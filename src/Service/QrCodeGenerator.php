@@ -47,9 +47,7 @@ class QrCodeGenerator
 
                 // $verificationUrl = $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::ABSOLUTE_URL);
                 // $verificationUrl = $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::ABSOLUTE_URL, 'https');
-                $verificationUrl = $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::ABSOLUTE_URL, [
-                    'scheme' => 'https',
-                ]);
+                $verificationUrl = $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::ABSOLUTE_URL + UrlGeneratorInterface::SCHEME_HTTPS);
 
                 $qrCode = $this->qrCodeBuilder
                     ->size(400)
