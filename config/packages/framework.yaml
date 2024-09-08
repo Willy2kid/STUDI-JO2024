@@ -8,9 +8,6 @@ framework:
 
     #esi: true
     #fragments: true
-    router:
-        request_context:
-            scheme: 'https'
 
 when@test:
     framework:
