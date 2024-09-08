@@ -19,7 +19,7 @@ class MailerService
     public function sendWelcomeEmail(User $user)
     {
         $email = (new Email())
-            ->from(new Address('jo2024-studi@outlook.com', 'John Doe'))
+            ->from(new Address('jo2024-studi@outlook.com', 'JO2024-STUDI'))
             ->to($user->getEmail())
             ->subject('Bienvenue sur l\'application JO2024 - STUDI')
             ->html('Vous avez créé un compte sur l\'application JO2024 - STUDI. Votre identifiant est : ' . $user->getUsername());
