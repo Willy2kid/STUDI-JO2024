@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.2",
         "ext-ctype": "*",
+        "ext-gd": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",
@@ -30,8 +31,7 @@
         "symfony/security-csrf": "7.1.*",
         "symfony/uid": "7.1.*",
         "symfony/validator": "7.1.*",
-        "symfony/yaml": "7.1.*",
-        "ext-gd": "*"
+        "symfony/yaml": "7.1.*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2",
