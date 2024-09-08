@@ -8,10 +8,6 @@ framework:
 
     #esi: true
     #fragments: true
-    assets:
-        packages:
-            js:
-                base_path: '%kernel.project_dir%/src/js'
 
 when@test:
     framework:
