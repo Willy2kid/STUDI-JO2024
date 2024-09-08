@@ -12,7 +12,7 @@ scheb_two_factor:
         # mailer: acme.custom_mailer_service  # Use alternative service to send the authentication code
         # code_generator: acme.custom_code_generator_service  # Use alternative service to generate authentication code
         sender_email: jo2024-studi@outlook.com   # Sender email address
-        sender_name: John Doe          # Sender name
+        sender_name: JO2024-STUDI          # Sender name
         digits: 4                      # Number of digits in authentication code
         template: security/2fa_form.html.twig   # Template used to render the authentication form
         
