@@ -9,7 +9,8 @@ framework:
     #esi: true
     #fragments: true
     router:
-        default_uri_scheme: https
+        request_context:
+            scheme: 'https'
 
 when@test:
     framework:
