@@ -39,6 +39,8 @@ class QrCodeCheck
             return ['error' => 'Invalid QR code'];
         } else {
             $userName = $user->getUsername();
+            $userFirstname = $user->getFirstname();
+            $userLastname = $user->getLastname();
             $productName = $orderItem->getProduct()->getName();
             $productOffer = $orderItem->getOffer();
         }
@@ -46,6 +48,8 @@ class QrCodeCheck
         return [
             'error' => null,
             'userName' => $userName,
+            'userFirstname' => $userFirstname,
+            'userLastname' => $userLastname,
             'productName' => $productName,
             'productOffer' => $productOffer,
         ];
