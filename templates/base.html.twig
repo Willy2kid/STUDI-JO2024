@@ -18,8 +18,10 @@
             Jeux Olympiques 2024
         </a>
         <div class="d-flex justify-content-center">
-            {% if is_granted("ROLE") %}
-                <span class="navbar-text">Hi {{ app.user.username }}</span>
+            {% if app.user %}
+                <span class="navbar-text">Vous êtes connecté sur le compte {{ app.user.userIdentifier }} || <a href="{{ path('app_logout') }}">se déconnecter</a></span>
+            {% else %}
+                <span class="navbar-text"><a href="{{ path('app_login') }}">Se connecter</a></span>
             {% endif %}
         </div>
         <div class="navbar-buttons">
