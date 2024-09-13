@@ -17,6 +17,11 @@
         <a href="{{ path('home') }}" class="navbar-brand">
             Jeux Olympiques 2024
         </a>
+        <div class="d-flex justify-content-center">
+            {% if is_granted("ROLE") %}
+                <span class="navbar-text">Hi {{ app.user.username }}</span>
+            {% endif %}
+        </div>
         <div class="navbar-buttons">
             <a href="{{ path('shop') }}" class="btn btn-light">
                 Boutique
