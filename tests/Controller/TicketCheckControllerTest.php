@@ -52,7 +52,7 @@ class TicketCheckControllerTest extends WebTestCase
 
         // Vérifier que le ticket est valide
         $crawler = $client->followRedirect();
-        $this->assertStringContainsString('User Name: user', $crawler->html());
+        $this->assertStringContainsString('Titulaire: John Doe', $crawler->html());
         $this->assertStringContainsString('Billet solo pour Product 1', $crawler->html());
     }
 
