@@ -25,6 +25,11 @@
             {% endif %}
         </div>
         <div class="navbar-buttons">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin') }}" class="btn btn-light">
+                    Admin
+                </a>                
+            {% endif %}
             <a href="{{ path('shop') }}" class="btn btn-light">
                 Boutique
             </a>
