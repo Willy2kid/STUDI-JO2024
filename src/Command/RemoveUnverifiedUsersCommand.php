@@ -1,8 +1,5 @@
 <?php
 
-// Exécuter avec la commande "php bin/console app:remove-unverified-users"
-// ou dans le cron "0 0 * * * php /path/to/your/project/bin/console app:remove-unverified-users"
-
 namespace App\Command;
 
 use App\Entity\User;
@@ -15,9 +12,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+// Execute from console with "php bin/console app:remove-unverified-users"
+// or periodically from cron "0 0 * * * php bin/console app:remove-unverified-users"
+
 #[AsCommand(
     name: 'app:remove-unverified-users',
-    description: 'Supprime les utilisateurs non vérifiés',
+    description: 'Remove unverified users',
 )]
 class RemoveUnverifiedUsersCommand extends Command
 {

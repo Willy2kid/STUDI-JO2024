@@ -12,12 +12,10 @@ class TwoFactorCondition implements TwoFactorConditionInterface
         $user = $context->getUser();
         $roles = $user->getRoles();
 
-        // Si l'utilisateur a le rôle ROLE_ADMIN, on retourne false
         if (in_array('ROLE_ADMIN', $roles)) {
             return false;
         }
 
-        // Sinon, on retourne true pour activer l'authentification à deux facteurs
         return true;
     }
 }

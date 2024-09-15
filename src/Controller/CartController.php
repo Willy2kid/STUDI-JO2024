@@ -69,9 +69,6 @@ class CartController extends AbstractController
         }
 
         else {
-            // setcookie('checkout', true, time() + 3600 * 24 * 30, '/', '', false, true);
-            // return $this->redirectToRoute('app_login');
-
             $response = new Response();
             $response->headers->setCookie(new Cookie('checkout', true, time() + 3600 * 24 * 30, '/', '', false, true));
             $response->setStatusCode(302);

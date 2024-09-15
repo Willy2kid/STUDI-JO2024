@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-// use App\Entity\User;
-// use App\Entity\OrderItem;
 use App\Repository\UserRepository;
 use App\Repository\OrderItemRepository;
 use Symfony\Component\Uid\Uuid;

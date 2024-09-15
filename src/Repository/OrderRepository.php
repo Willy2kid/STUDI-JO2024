@@ -41,15 +41,4 @@ class OrderRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-    // public function deleteOrderByOrderId($orderId)
-    // {
-    //     $queryBuilder = $this->createQueryBuilder('oi');
-    //     $queryBuilder
-    //         ->delete('App\Entity\Order', 'oi')
-    //         ->where('oi.id = :orderId')
-    //         ->setParameter('orderId', $orderId)
-    //         ->getQuery()
-    //         ->execute();
-    // }
 }

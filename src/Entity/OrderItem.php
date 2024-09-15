@@ -22,8 +22,6 @@ class OrderItem
     private ?Product $product = null;
 
     #[ORM\Column]
-    // #[Assert\NotBlank()]
-    // #[Assert\GreaterThanOrEqual(1)]
     private ?int $quantity = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

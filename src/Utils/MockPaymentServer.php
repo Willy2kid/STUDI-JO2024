@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MockPaymentServer
 {
-    // public function handleRequest(Request $request)
     public function handleRequest()
     {
         // Simulate a payment processing delay

@@ -21,6 +21,6 @@ class AddToCartType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        // Pas de liaison avec une entité
+        
     }
 }

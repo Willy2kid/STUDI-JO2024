@@ -112,7 +112,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -151,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     public function isEmailAuthEnabled(): bool
     {
-        return true; // This can be a persisted field to switch email code authentication on/off
+        return true;
     }
 
     public function getEmailAuthRecipient(): string
@@ -211,6 +210,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 }

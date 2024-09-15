@@ -21,21 +21,6 @@ class OrderItemRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderItem::class);
     }
 
-    // public function updateOrderRef($oldOrderRef, $newOrderRef)
-    // {
-    //     $queryBuilder = $this->createQueryBuilder('oi');
-    //     $queryBuilder
-    //         ->update('App\Entity\OrderItem', 'oi')
-    //         ->set('oi.orderRef', ':newOrderRef')
-    //         ->where('oi.orderRef = :oldOrderRef')
-    //         ->setParameter('newOrderRef', $newOrderRef)
-    //         ->setParameter('oldOrderRef', $oldOrderRef)
-    //         ->getQuery()
-    //         ->execute();
-    // 
-    //     $this->getEntityManager()->flush();
-    // }
-
     public function deleteOrderItemsById(int $id)
     {
         $queryBuilder = $this->createQueryBuilder('oi');
@@ -50,11 +35,11 @@ class OrderItemRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('oi')
             ->select('p.id, SUM(oi.quantity) as count')
-            ->join('oi.product', 'p') // Join the Product entity
+            ->join('oi.product', 'p')
             ->join('oi.orderRef', 'o')
             ->where('o.status = :status')
             ->setParameter('status', Order::STATUS_PAID)
-            ->groupBy('p.id'); // Group by the Product ID
+            ->groupBy('p.id');
     
         return $qb->getQuery()->getResult();
     }

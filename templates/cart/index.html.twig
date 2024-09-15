@@ -11,7 +11,7 @@
     <div class="container mt-4">
         {% if cart.items.count > 0 %}
             <div class="row mt-4">
-                <!-- List of items -->
+                <!-- Cart items -->
                 <div class="col-md-8">
                     {{ form_start(form) }}
                     <div class="card">
@@ -58,7 +58,6 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <!-- <a href="#" class="btn btn-warning w-100">Checkout</a> -->
                             <a href="{{ path('app_checkout') }}" class="btn btn-warning w-100">Paiement</a>
                         </div>
                     </div>
@@ -90,7 +89,6 @@
                                     <li class="list-group-item">
                                         <div class="d-flex">
                                             <div class="flex-fill mr-2">
-                                                {# <img src="{{ asset('images/product/' ~ item.id ~ '.png') }}" width="110"> #}
                                             </div>
                                             <div class="flex-fill mr-2">
                                                 <h5 class="mt-0 mb-0">{{ item.name }}</h5>
@@ -98,17 +96,12 @@
                                                 <small>Entrée pour {{ item.quantity }} personne(s)</small>
                                             </div>
                                             <div class="flex-fill mr-2 text-right">
-                                                <!-- Add the price here if you want -->
                                             </div>
                                             <div class="flex-fill mr-2">
-                                                {# {% if item.id %} #}
-                                                    {# <img src="{{ item.qrcode }}" width="64" alt="QR Code"> #}
-                                                    {# <img src="{{ asset('images/qrcode/qrcode_20.png') }}" width="64" alt="QR Code"> #}
                                                     <img src="{{ asset('images/qrcode/' ~ item.ticket ~ '.png') }}" width="64" alt="QR Code">
                                                     <a href="{{ asset('images/qrcode/' ~ item.ticket ~ '.png') }}" download="qrcode_{{ item.ticket }}.png">
                                                         <button type="button" class="btn btn-primary btn-xs" style="font-size: 0.8em;">Télécharger</button>
                                                     </a>
-                                                {# {% endif %} #}
                                             </div>
                                         </div>
                                     </li>

@@ -16,9 +16,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -49,10 +47,8 @@ class SecurityController extends AbstractController
             $cartManager->save($userCart);
             $response = new Response();
             $response->headers->clearCookie('cart_id');
-            // $request->cookies->remove('cart_id'); 
         }
 
-        // if (isset($_COOKIE['checkout'])) {
         if ($request->cookies->has('checkout'))
         {
             $response = new Response();

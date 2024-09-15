@@ -36,7 +36,6 @@ class QrCodeGenerator
         $userId = $this->security->getUser()->getId();
         $qrCodeDir = $this->kernel->getProjectDir() . '/public/images/qrcode/';
 
-        // Créer le répertoire si il n'existe pas
         if (!is_dir($qrCodeDir)) {
             mkdir($qrCodeDir, 0777, true);
         }
@@ -45,7 +44,6 @@ class QrCodeGenerator
                 $item->generateTicket();
                 $data = $userId . '_' . $item->getTicket();
 
-                // $verificationUrl = $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::ABSOLUTE_URL);
                 $verificationUrl = 'https:' . $this->urlGenerator->generate('ticket_check', ['qrCodeText' => $data], UrlGeneratorInterface::NETWORK_PATH);
 
                 $qrCode = $this->qrCodeBuilder

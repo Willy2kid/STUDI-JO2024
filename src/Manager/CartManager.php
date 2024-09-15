@@ -88,10 +88,8 @@ class CartManager
      */
     public function save(Order $cart): void
     {
-        // Persist in database
         $this->entityManager->persist($cart);
         $this->entityManager->flush();
-        // Persist in session
         
         // If guest session, add cart_id in cookie
         if (!$this->security->isGranted('IS_AUTHENTICATED')) {

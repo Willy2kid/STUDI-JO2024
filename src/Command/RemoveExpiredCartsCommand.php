@@ -8,9 +8,11 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-// use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+
+// Execute from console with "php bin/console app:remove-expired-carts"
+// or periodically from cron "0 0 * * * php bin/console app:remove-expired-carts"
 
 #[AsCommand(
     name: 'app:remove-expired-carts',
@@ -28,8 +30,6 @@ class RemoveExpiredCartsCommand extends Command
      * @var OrderRepository
      */
     private $orderRepository;
-
-//    protected static $defaultName = 'app:remove-expired-carts';
 
     /**
      * RemoveExpiredCartsCommand constructor.
@@ -50,7 +50,6 @@ class RemoveExpiredCartsCommand extends Command
     protected function configure(): void
     {
         $this
-//        ->setDescription('Removes carts that have been inactive for a defined period')
         ->addArgument(
             'days',
             InputArgument::OPTIONAL,
@@ -74,18 +73,16 @@ class RemoveExpiredCartsCommand extends Command
             return Command::FAILURE;
         }
 
-        // Subtracts the number of days from the current date.
         $limitDate = new \DateTime("- $days days");
         $expiredCartsCount = 0;
 
         while($carts = $this->orderRepository->findCartsNotModifiedSince($limitDate)) {
             foreach ($carts as $cart) {
-                // Items will be deleted on cascade
                 $this->entityManager->remove($cart);
             }
 
-            $this->entityManager->flush(); // Executes all deletions
-            $this->entityManager->clear(); // Detaches all object from Doctrine
+            $this->entityManager->flush();
+            $this->entityManager->clear();
 
             $expiredCartsCount += count($carts);
         };
