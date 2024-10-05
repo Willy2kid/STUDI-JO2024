@@ -39,7 +39,9 @@ class AdminController extends AbstractController
             $image = $form->get('image')->getData();
             if ($image) {
                 $productId = $product->getId();
-                $imageHandler->uploadImage($image, $productId);
+                $imageUrl = $imageHandler->uploadImage($image, $productId);
+                $product->setImg($imageUrl);
+                $entityManager->flush();
             }
 
             return $this->redirectToRoute('admin');
