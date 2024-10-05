@@ -2,6 +2,7 @@
 
 namespace App\Service;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Cloudinary\Cloudinary;
 use Cloudinary\Api\Upload\UploadApi;
 use GuzzleHttp\Client;
 
@@ -28,7 +29,10 @@ class ImageHandler
         // 
         // $image->move($productImgDir, $imageName);
 
-        $cloudinary->uploadApi()->upload($image->getPathname(), array(
+
+        // $cloudinary = new UploadApi();
+        // $cloudinary->uploadApi()->upload($image->getPathname(), array(
+        (new UploadApi())->upload($image->getPathname(), array(
             'folder' => 'product',
             'public_id' => $productId
         ));
